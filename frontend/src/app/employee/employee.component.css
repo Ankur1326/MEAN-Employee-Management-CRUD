@@ -1,0 +1,14 @@
+.dept {
+    background-color: #198754;
+    width: fit-content;
+    border-radius: 5px ;
+    padding: 5px 10px;
+}
+
+.second-header{
+    display: flex;
+    justify-content: space-between;
+}
+.show{
+    display: block;
+}

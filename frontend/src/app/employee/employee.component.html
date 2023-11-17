@@ -1,0 +1,76 @@
+<div class="container py-3">
+    <div class="row second-header">
+        <div class="col-md-6">
+            <h2>Employee Management</h2>
+        </div>
+
+        <div class="col ml-auto" style="text-align: right;">
+            <button (click)="showFormModal()" type="button" class="btn btn-outline-success">
+                <i class="fa fa-plus"></i>
+                Add Employee
+            </button>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- Card  -->
+<div class="flex" style="display: flex; gap: 25px; flex-wrap: wrap; padding: 0 30px;">
+    @for (employee of employees; track $index) {
+    <div class="col-md-4" style="width: 360px;">
+        <div class="card md-3">
+            <div class="card-body">
+                <h5 class="card-title">{{employee.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{employee.position}}</h6>
+                <span class="badge badge-success dept">{{employee.dept}}</span>
+                <hr>
+                <button (click)="onEditEmployee(employee)" class="btn btn-outline-success" style="margin-right: 10px;">Edit</button>
+                <button (click)="onDeleteEmployee(employee._id)" class="btn btn-outline-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+<!-- modal  -->
+
+<div class="modal fade" [class.show]="showModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100 font-weight-bold">{{editMode ? "Update" : "Add"}} Employee</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span (click)="oncloseModal()">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="empForm" #formSubmit="ngForm" (submit)="onSubmit(formSubmit.value)"
+                class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="name" style="margin-bottom: 5px;">Enter
+                        name</label>
+                    <input formControlName="name" type="text" name="name" id="name" class="form-control validate">
+                </div>
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="Poistion" style="margin-bottom: 5px;">Enter
+                        Poistion</label>
+                    <input formControlName="position" type="text" name="position" id="Poistion"
+                        class="form-control validate">
+                </div>
+
+                <div class="md-form mb-4">
+                    <label data-error="wrong" data-success="right" for="dept" style="margin-bottom: 5px;">Enter
+                    Department</label>
+                    <input formControlName="dept" type="text" name="dept" id="dept" class="form-control validate">
+                </div>
+
+                <div class="modal-footer d-flex justify-content-right">
+                    <a (click)="oncloseModal()" class="btn btn-secondary">Close</a>
+                    <button class="btn btn-success">Submit</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
